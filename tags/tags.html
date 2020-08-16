@@ -1,430 +1,104 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>tags | Hexo</title>
-  <meta name="author" content="John Doe">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>tags | Hexo</title><meta name="description" content="tags"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/leoliao1986.github.io/img/favicon.png"><link rel="canonical" href="http://jackson19861023.github.io/leoliao1986.github.io/tags/tags"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="tags"><meta property="og:url" content="http://jackson19861023.github.io/leoliao1986.github.io/tags/tags"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="tags"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-08-16T10:03:00.315Z"><meta property="article:modified_time" content="2020-08-16T10:03:00.296Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
 
-  <meta property="og:title" content="tags"/>
-  <meta property="og:site_name" content="Hexo"/>
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 
-  
-    <meta property="og:image" content=""/>
-  
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-  
-    <link rel="alternative" href="/leoliao1986.github.io//atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link href="/leoliao1986.github.io/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/themes/cerulean.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/highlight-default.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/leoliao1986.github.io/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/leoliao1986.github.io/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-<meta name="generator" content="Hexo 5.0.2"></head>
-
-<body>
-  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/leoliao1986.github.io/">Hexo</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/leoliao1986.github.io/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/leoliao1986.github.io/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/leoliao1986.github.io/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/leoliao1986.github.io/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-    <div class="content">
-      <!-- title -->
-<div class="page-header page-header-inverse ">
-	 <h1 class="title title-inverse "><i class="fa fa-tags"></i> tags</h1>
-</div>
-
-<div class="row page">
-
-	
-	<div class="col-md-9">
-	
-
-<div id="top_search"></div>
-
-
-	<div class="widget">
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="#Cohort">Cohort<span>1</span></a></li>
-		
-			<li><a href="#Google">Google<span>1</span></a></li>
-		
-			<li><a href="#Longitudinal data">Longitudinal data<span>1</span></a></li>
-		
-			<li><a href="#R">R<span>1</span></a></li>
-		
-			<li><a href="#Spatial location">Spatial location<span>1</span></a></li>
-		
-		</ul>
-	</div>
-
-<div class="archive">
-	
-
-	<h4 class="archive-ul show" data-toggle="collapse" id="Cohort" data-target="#modal-Cohort"> Cohort <b class="caret"></b></h4>
-	   <ul id="modal-Cohort" class="collapse in">
-	   
-	      
-		      
-			    
-		      
-			    
-   	   	   	       <li class="listing-item"><a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/"  title="Statistical methods for follow-up data." >纵向数据分析方法在公共卫生研究中应用</a></li>
-				
-		      
-		  
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-	   
-	   
-	   </ul>
-	
-
-	<h4 class="archive-ul show" data-toggle="collapse" id="Google" data-target="#modal-Google"> Google <b class="caret"></b></h4>
-	   <ul id="modal-Google" class="collapse in">
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-		      
-			    
-		      
-			    
-   	   	   	       <li class="listing-item"><a href="/leoliao1986.github.io/2020/08/16/A-good-day/"  title="Multiple tasks of linking geographic residence from Google Maps." >Linking geographic information by Google Map API</a></li>
-				
-		      
-			    
-		      
-		  
-	   
-	      
-	   
-	   
-	   </ul>
-	
-
-	<h4 class="archive-ul show" data-toggle="collapse" id="Longitudinal data" data-target="#modal-Longitudinal data"> Longitudinal data <b class="caret"></b></h4>
-	   <ul id="modal-Longitudinal data" class="collapse in">
-	   
-	      
-		      
-			    
-   	   	   	       <li class="listing-item"><a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/"  title="Statistical methods for follow-up data." >纵向数据分析方法在公共卫生研究中应用</a></li>
-				
-		      
-			    
-		      
-		  
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-	   
-	   
-	   </ul>
-	
-
-	<h4 class="archive-ul show" data-toggle="collapse" id="R" data-target="#modal-R"> R <b class="caret"></b></h4>
-	   <ul id="modal-R" class="collapse in">
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-			    
-   	   	   	       <li class="listing-item"><a href="/leoliao1986.github.io/2020/08/16/A-good-day/"  title="Multiple tasks of linking geographic residence from Google Maps." >Linking geographic information by Google Map API</a></li>
-				
-		      
-		  
-	   
-	      
-	   
-	   
-	   </ul>
-	
-
-	<h4 class="archive-ul show" data-toggle="collapse" id="Spatial location" data-target="#modal-Spatial location"> Spatial location <b class="caret"></b></h4>
-	   <ul id="modal-Spatial location" class="collapse in">
-	   
-	      
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-		      
-			    
-   	   	   	       <li class="listing-item"><a href="/leoliao1986.github.io/2020/08/16/A-good-day/"  title="Multiple tasks of linking geographic residence from Google Maps." >Linking geographic information by Google Map API</a></li>
-				
-		      
-			    
-		      
-			    
-		      
-		  
-	   
-	      
-	   
-	   
-	   </ul>
-	
-	</ul>
-</div>
-
-
-
-</div> <!-- col-md-9 -->
-
-	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
-
-
-		
-			<div class="widget">
-    
-</div>
-
-		
-			
-	<div class="widget">
-		<h4>Categories</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/leoliao1986.github.io/categories/Longitudinal-data-analysis/">Longitudinal data analysis<span>1</span></a></li>
-		
-			<li><a href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology<span>1</span></a></li>
-		
-		</ul>
-	</div>
-
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/leoliao1986.github.io/tags/Google/">Google<span>1</span></a></li>
-		
-			<li><a href="/leoliao1986.github.io/tags/Longitudinal-data/">Longitudinal data<span>1</span></a></li>
-		
-			<li><a href="/leoliao1986.github.io/tags/Spatial-location/">Spatial location<span>1</span></a></li>
-		
-			<li><a href="/leoliao1986.github.io/tags/R/">R<span>1</span></a></li>
-		
-			<li><a href="/leoliao1986.github.io/tags/Cohort/">Cohort<span>1</span></a></li>
-		
-		 
-		</ul>
-	</div>
-
-
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
-    
-      <li>
-        <a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/"  title="Statistical methods for follow-up data." ><i class="fa fa-file-o"></i>纵向数据分析方法在公共卫生研究中应用</a>
-      </li>
-    
-      <li>
-        <a href="/leoliao1986.github.io/2020/08/16/A-good-day/"  title="Multiple tasks of linking geographic residence from Google Maps." ><i class="fa fa-file-o"></i>Linking geographic informat...</a>
-      </li>
-    
-      <li>
-        <a href="/leoliao1986.github.io/2020/08/16/hello-world/" ><i class="fa fa-file-o"></i>Hello World</a>
-      </li>
-    
-  </ul>
-</div>
-
-		
-			
-<div class="widget">
-	<h4>Links</h4>
-	<ul class="blogroll list-unstyled">
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/wzpan/freemind/" title="Freemind's Github repository." target="_blank"]);">Freemind</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="http://www.github.com/wzpan" title="My Github account." target="_blank"]);">My Github</a></li>
-	
-		<li><i class="fa fa-linkedin"></i><a href="http://www.linkedin.com/in/hahack" title="My Linkin account." target="_blank"]);">My LinkedIn</a></li>
-	
-	</ul>
-</div>
-
-
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
-	
-
-</div> <!-- row-fluid -->
-
-    </div>
-  </div>
-  <div class="container-narrow">
-    <footer> <p>
-  &copy; 2020 John Doe
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-  </div> <!-- container-narrow -->
-  
-
-
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
-
-<script src="/leoliao1986.github.io/js/jquery.imagesloaded.min.js"></script>
-<script src="/leoliao1986.github.io/js/gallery.js"></script>
-<script src="/leoliao1986.github.io/js/bootstrap.min.js"></script>
-<script src="/leoliao1986.github.io/js/main.js"></script>
-<script src="/leoliao1986.github.io/js/search.js"></script> 
-
-
-<link rel="stylesheet" href="/leoliao1986.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/leoliao1986.github.io/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-
-
-<!-- syntax highlighting -->
-
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</body>
-</html>
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/leoliao1986.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/leoliao1986.github.io/',
+  hexoversion: '5.0.2',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2020-08-16 18:03:00'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.0.2"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/leoliao1986.github.io/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/leoliao1986.github.io/archives/"><div class="headline">Articles</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/leoliao1986.github.io/tags/"><div class="headline">Tags</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/leoliao1986.github.io/categories/"><div class="headline">Categories</div><div class="length_num">2</div></a></div></div></div><hr/></div></div><div id="body-wrap"><header class="not-index-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/IuWi8QbHvzjlOPw.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/leoliao1986.github.io/">Hexo</a></span><span class="pull-right menus"><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="page_site-info"><h1 id="site_title">tags</h1></div></header><main class="layout_page" id="content-inner"><div id="page"><div id="article-container"></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/leoliao1986.github.io/img/avatar.png" onerror="this.onerror=null;this.src='/leoliao1986.github.io/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/leoliao1986.github.io/archives"><div class="headline">Articles</div><div class="length_num">3</div></a></div><div class="card-info-data-item is-center">      <a href="/leoliao1986.github.io/tags"><div class="headline">Tags</div><div class="length_num">5</div></a></div><div class="card-info-data-item is-center"><a href="/leoliao1986.github.io/categories"><div class="headline">Categories</div><div class="length_num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-recent-item"><div class="aside-recent-post"><a class="aside-post-cover" href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/" title="纵向数据分析方法在公共卫生研究中应用"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/leoliao1986.github.io/img/404.jpg'" alt="纵向数据分析方法在公共卫生研究中应用"/></a><div class="aside-post-info"><a class="aside-post-title" href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/" title="纵向数据分析方法在公共卫生研究中应用">纵向数据分析方法在公共卫生研究中应用</a><time class="aside-post_meta post-meta-date" datetime="2020-08-16T09:33:26.000Z" title="Created 2020-08-16 17:33:26">2020-08-16</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/leoliao1986.github.io/2020/08/16/A-good-day/" title="Linking geographic information by Google Map API"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/leoliao1986.github.io/img/404.jpg'" alt="Linking geographic information by Google Map API"/></a><div class="aside-post-info"><a class="aside-post-title" href="/leoliao1986.github.io/2020/08/16/A-good-day/" title="Linking geographic information by Google Map API">Linking geographic information by Google Map API</a><time class="aside-post_meta post-meta-date" datetime="2020-08-16T07:30:16.000Z" title="Created 2020-08-16 15:30:16">2020-08-16</time></div></div><div class="aside-recent-post"><a class="aside-post-cover" href="/leoliao1986.github.io/2020/08/16/hello-world/" title="Hello World"><img class="aside-post-bg" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/leoliao1986.github.io/img/404.jpg'" alt="Hello World"/></a><div class="aside-post-info"><a class="aside-post-title" href="/leoliao1986.github.io/2020/08/16/hello-world/" title="Hello World">Hello World</a><time class="aside-post_meta post-meta-date" datetime="2020-08-16T04:05:19.886Z" title="Created 2020-08-16 12:05:19">2020-08-16</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/leoliao1986.github.io/categories/Longitudinal-data-analysis/"><span class="card-category-list-name">Longitudinal data analysis</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/"><span class="card-category-list-name">Spaitial epidemiology</span><span class="card-category-list-count">1</span></a></li>
+                       
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/leoliao1986.github.io/tags/Cohort/" style="font-size: 16px; color: #999">Cohort</a> <a href="/leoliao1986.github.io/tags/Google/" style="font-size: 16px; color: #999">Google</a> <a href="/leoliao1986.github.io/tags/Longitudinal-data/" style="font-size: 16px; color: #999">Longitudinal data</a> <a href="/leoliao1986.github.io/tags/R/" style="font-size: 16px; color: #999">R</a> <a href="/leoliao1986.github.io/tags/Spatial-location/" style="font-size: 16px; color: #999">Spatial location</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/leoliao1986.github.io/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">3</span></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">Article :</div><div class="webinfo-article-count">3</div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">UV :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">PV :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/leoliao1986.github.io/js/utils.js"></script><script src="/leoliao1986.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
