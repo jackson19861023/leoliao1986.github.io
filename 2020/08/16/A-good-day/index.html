@@ -5,21 +5,21 @@
   
 
   
-  <title>postName | Hexo</title>
+  <title>Linking geographic information by Google Map API | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
+  <meta name="description" content="Multiple tasks of linking geographic residence from Google Maps.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="postName">
+<meta property="og:title" content="Linking geographic information by Google Map API">
 <meta property="og:url" content="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/A-good-day/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
+<meta property="og:description" content="Multiple tasks of linking geographic residence from Google Maps.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-16T07:30:16.000Z">
-<meta property="article:modified_time" content="2020-08-16T05:26:08.820Z">
+<meta property="article:modified_time" content="2020-08-16T06:42:58.307Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="tag1">
-<meta property="article:tag" content="tag2">
-<meta property="article:tag" content="tag3">
+<meta property="article:tag" content="Spatial location">
+<meta property="article:tag" content="Google">
+<meta property="article:tag" content="R">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/leoliao1986.github.io/atom.xml" title="Hexo" type="application/atom+xml">
@@ -84,7 +84,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/leoliao1986.github.io/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a>
+    <a class="article-category-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a>
   </div>
 
   </div>
@@ -95,7 +95,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      postName
+      Linking geographic information by Google Map API
     </h1>
   
 
@@ -103,32 +103,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用github pages服务搭建博客的好处有：</p>
-<ol>
-<li>全是静态文件，访问速度快；</li>
-<li>免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</li>
-<li>可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li>数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</li>
-<li>博客内容可以轻松打包、转移、发布到其它平台；</li>
-<li>等等；</li>
-</ol>
-<script type="math/tex; mode=display">
-H=-\sum_{i=1}^N (\sigma_{i}^x \sigma_{i+1}^x+g \sigma_{i}^z)</script><script type="math/tex; mode=display">
-f(n) = \begin{cases}
- \frac{n}{2},
- & \text{if } n\text{ is even}
- \\ 3n+1, & \text{if } n\text{ is odd}
- \end{cases}</script>
+        <p>We need locate the geographic information of the study participants before we conduct spatial analysis.<br>In this section, we introduce a simple method to link the residence of the study participants by Google Mapis.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">geocode_cn&lt;-function(address)&#123;</span><br><span class="line">           require(ggmap)</span><br><span class="line">require(rjson)</span><br><span class="line">##Transform Chinese address into english texts</span><br><span class="line">   for(i in 1:length(address))&#123;</span><br><span class="line">           location[i]&lt;-paste(paste(&#39;%&#39;,unlist(iconv(address[i],from&#x3D;&#39;GB2312&#39;,</span><br><span class="line">           to&#x3D;&quot;utf-8&quot;,toRaw&#x3D;T)),sep&#x3D;&#39;&#39;),collapse&#x3D;&#39;&#39;)</span><br><span class="line">&#125;</span><br><span class="line">posturl &lt;-paste(location, sep &#x3D; &quot;&amp;&quot;)</span><br><span class="line">url_string&lt;-paste(&quot;http:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;geocode&#x2F;json?address&#x3D;&quot;,</span><br><span class="line">            posturl,&quot;&amp;sensor&#x3D;false&quot;,sep&#x3D;&quot;&quot;)</span><br><span class="line">gc2&lt;-matrix(0,length(address),2)</span><br><span class="line"> for(i in 1:length(address))&#123;</span><br><span class="line">   url_string2&lt;-URLencode(url_string[i])</span><br><span class="line">  connect&lt;-url(url_string2)</span><br><span class="line">  lines&lt;-try(readLines(connect,warn&#x3D;FALSE),silent&#x3D;TRUE)</span><br><span class="line">  close(connect)</span><br><span class="line">gc&lt;-fromJSON(paste(lines,collapse&#x3D;&quot;&quot;))</span><br><span class="line">    if(gc$status&#x3D;&#x3D;&quot;OK&quot;) &#123;</span><br><span class="line">       lat &lt;-gcresults[[1]]geometrylocationlat</span><br><span class="line">       lon &lt;-gcresults[[1]]geometrylocationlng</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        lat&lt;-NA</span><br><span class="line">         lon&lt;-NA</span><br><span class="line">       &#125;</span><br><span class="line">      res&lt;-cbind(lon,lat)  </span><br><span class="line">   gc2[i,]&lt;-res[1,]</span><br><span class="line"> &#125;</span><br><span class="line"> return(gc2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
       <a data-url="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/A-good-day/" data-id="ckdwpqb8g0000zguj3n3jcz4s" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/tag1/" rel="tag">tag1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/tag2/" rel="tag">tag2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/tag3/" rel="tag">tag3</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/Google/" rel="tag">Google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/Spatial-location/" rel="tag">Spatial location</a></li></ul>
 
     </footer>
   </div>
@@ -155,7 +138,7 @@ f(n) = \begin{cases}
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/leoliao1986.github.io/categories/%E9%BB%98%E8%AE%A4%E5%88%86%E7%B1%BB/">默认分类</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a></li></ul>
     </div>
   </div>
 
@@ -165,7 +148,7 @@ f(n) = \begin{cases}
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/tag1/" rel="tag">tag1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/tag2/" rel="tag">tag2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/tag3/" rel="tag">tag3</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/Google/" rel="tag">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/R/" rel="tag">R</a></li><li class="tag-list-item"><a class="tag-list-link" href="/leoliao1986.github.io/tags/Spatial-location/" rel="tag">Spatial location</a></li></ul>
     </div>
   </div>
 
@@ -175,7 +158,7 @@ f(n) = \begin{cases}
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/leoliao1986.github.io/tags/tag1/" style="font-size: 10px;">tag1</a> <a href="/leoliao1986.github.io/tags/tag2/" style="font-size: 10px;">tag2</a> <a href="/leoliao1986.github.io/tags/tag3/" style="font-size: 10px;">tag3</a>
+      <a href="/leoliao1986.github.io/tags/Google/" style="font-size: 10px;">Google</a> <a href="/leoliao1986.github.io/tags/R/" style="font-size: 10px;">R</a> <a href="/leoliao1986.github.io/tags/Spatial-location/" style="font-size: 10px;">Spatial location</a>
     </div>
   </div>
 
@@ -197,7 +180,7 @@ f(n) = \begin{cases}
       <ul>
         
           <li>
-            <a href="/leoliao1986.github.io/2020/08/16/A-good-day/">postName</a>
+            <a href="/leoliao1986.github.io/2020/08/16/A-good-day/">Linking geographic information by Google Map API</a>
           </li>
         
           <li>
@@ -257,20 +240,5 @@ f(n) = \begin{cases}
 
 
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
