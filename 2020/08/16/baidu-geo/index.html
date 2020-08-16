@@ -5,14 +5,21 @@
   
 
   
-  <title>Archives | Leo&#39;s talks</title>
+  <title>Linking geographic information by Baidu Map API | Leo&#39;s talks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Leo&#39;s talks">
-<meta property="og:url" content="http://jackson19861023.github.io/leoliao1986.github.io/archives/index.html">
+  <meta name="description" content="Multiple tasks of linking geographic residence from Baidu Maps.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linking geographic information by Baidu Map API">
+<meta property="og:url" content="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/baidu-geo/index.html">
 <meta property="og:site_name" content="Leo&#39;s talks">
+<meta property="og:description" content="Multiple tasks of linking geographic residence from Baidu Maps.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-16T07:30:16.000Z">
+<meta property="article:modified_time" content="2020-08-16T15:38:06.475Z">
 <meta property="article:author" content="Jiaqiang Liao">
+<meta property="article:tag" content="Spatial location">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="Baidu">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/leoliao1986.github.io/atom.xml" title="Leo&#39;s talks" type="application/atom+xml">
@@ -72,98 +79,113 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/leoliao1986.github.io/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/" class="archive-article-date">
-  <time datetime="2020-08-16T09:33:26.000Z" itemprop="datePublished">Aug 16</time>
+        <section id="main"><article id="post-baidu-geo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/leoliao1986.github.io/2020/08/16/baidu-geo/" class="article-date">
+  <time datetime="2020-08-16T07:30:16.000Z" itemprop="datePublished">2020-08-16</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/">纵向数据分析方法在公共卫生研究中应用</a>
+    <h1 class="article-title" itemprop="name">
+      Linking geographic information by Baidu Map API
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/leoliao1986.github.io/2020/08/16/A-good-day/" class="archive-article-date">
-  <time datetime="2020-08-16T07:30:16.000Z" itemprop="datePublished">Aug 16</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/leoliao1986.github.io/2020/08/16/A-good-day/">Linking geographic information by Google Map API</a>
-    </h1>
-  
+        <p>We can link the residence to lon and lat by The Baidu Map. The multiple tasks can be easily conducted through<br>Baidu API. We re-worted the function “gecode_baidu” based on the funciton “geocode” from the R package. </p>
+<pre><code class="lang-&amp;#123;r&amp;#125;">gecode_baidu&lt;-function(location,key)&amp;#123;
+  require(ggmap)
+  require(rjson)
+  posturl &lt;-paste(location, sep = &quot;&amp;&quot;)
+  url_string &lt;- paste(&quot;http://api.map.baidu.com/geocoder/v2/?ak=&quot;,key,&quot;&amp;output=json&amp;address=&quot;, 
+                      posturl, sep = &quot;&quot;)
+  gc2&lt;-matrix(0,length(location),2)
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/leoliao1986.github.io/2020/08/16/baidu-geo/" class="archive-article-date">
-  <time datetime="2020-08-16T07:30:16.000Z" itemprop="datePublished">Aug 16</time>
-</a>
+  for(i in 1:length(location))&amp;#123;                    
+    url_string2&lt;- URLencode(url_string[i])
+
+    connect &lt;- url(url_string2)
+    lines &lt;- try(readLines(connect, warn = FALSE), silent = TRUE)
+    close(connect)
+    ##瀵逛笉鑳芥壘鍑虹殑鍦板潃锛岀粡绾害璧嬩簣缂哄け鍊?
+    gc&lt;- fromJSON(paste(lines, collapse = &quot;&quot;))
+
+    if   (gc$status==0)&amp;#123;
+      lon&lt;-gc$result$location$lng;lat&lt;-gc$result$location$lat&amp;#125;
+    else &amp;#123;lon&lt;-NA;lat&lt;-NA&amp;#125;
+
+    res&lt;-cbind(lon,lat)
+    gc2[i,]&lt;-res[1,]
+  &amp;#125;
+  return(gc2)
+&amp;#125;
+</code></pre>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/leoliao1986.github.io/2020/08/16/baidu-geo/">Linking geographic information by Baidu Map API</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/leoliao1986.github.io/2020/08/16/hello-world/" class="archive-article-date">
-  <time datetime="2020-08-16T04:05:19.886Z" itemprop="datePublished">Aug 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/baidu-geo/" data-id="ckdx97irs0000moujdx0gf70u" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/leoliao1986.github.io/2020/08/16/hello-world/">Hello World</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/Baidu/" rel="tag">Baidu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/leoliao1986.github.io/tags/Spatial-location/" rel="tag">Spatial location</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/leoliao1986.github.io/2020/08/16/A-good-day/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linking geographic information by Google Map API
+        
+      </div>
+    </a>
+  
+  
+    <a href="/leoliao1986.github.io/2020/08/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
+
+    <div id="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+new Valine({
+    el: '#comment' ,
+    notify:false, 
+    verify:false, 
+    appId: '5zeLNyK0SNDDoOFMR9feAkpP-gzGzoHsz',
+    appKey: 'S2ybglhwVghCKchrHPjkIMGI',
+    placeholder: 'ヾﾉ≧∀≦)o欢迎评论!',
+    path:window.location.pathname, 
+    avatar:'mm' 
+});
+</script>
+    
 </section>
         
           <aside id="sidebar">

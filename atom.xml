@@ -65,6 +65,31 @@
   </entry>
   
   <entry>
+    <title>Linking geographic information by Baidu Map API</title>
+    <link href="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/baidu-geo/"/>
+    <id>http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/baidu-geo/</id>
+    <published>2020-08-16T07:30:16.000Z</published>
+    <updated>2020-08-16T15:38:06.475Z</updated>
+    
+    <content type="html"><![CDATA[<p>We can link the residence to lon and lat by The Baidu Map. The multiple tasks can be easily conducted through<br>Baidu API. We re-worted the function “gecode_baidu” based on the funciton “geocode” from the R package. </p><pre><code class="lang-&amp;#123;r&amp;#125;">gecode_baidu&lt;-function(location,key)&amp;#123;  require(ggmap)  require(rjson)  posturl &lt;-paste(location, sep = &quot;&amp;&quot;)  url_string &lt;- paste(&quot;http://api.map.baidu.com/geocoder/v2/?ak=&quot;,key,&quot;&amp;output=json&amp;address=&quot;,                       posturl, sep = &quot;&quot;)  gc2&lt;-matrix(0,length(location),2)  for(i in 1:length(location))&amp;#123;                        url_string2&lt;- URLencode(url_string[i])    connect &lt;- url(url_string2)    lines &lt;- try(readLines(connect, warn = FALSE), silent = TRUE)    close(connect)    ##瀵逛笉鑳芥壘鍑虹殑鍦板潃锛岀粡绾害璧嬩簣缂哄け鍊?    gc&lt;- fromJSON(paste(lines, collapse = &quot;&quot;))    if   (gc$status==0)&amp;#123;      lon&lt;-gc$result$location$lng;lat&lt;-gc$result$location$lat&amp;#125;    else &amp;#123;lon&lt;-NA;lat&lt;-NA&amp;#125;    res&lt;-cbind(lon,lat)    gc2[i,]&lt;-res[1,]  &amp;#125;  return(gc2)&amp;#125;</code></pre>]]></content>
+    
+    
+    <summary type="html">Multiple tasks of linking geographic residence from Baidu Maps.</summary>
+    
+    
+    
+    <category term="Spaitial epidemiology" scheme="http://jackson19861023.github.io/leoliao1986.github.io/categories/Spaitial-epidemiology/"/>
+    
+    
+    <category term="Spatial location" scheme="http://jackson19861023.github.io/leoliao1986.github.io/tags/Spatial-location/"/>
+    
+    <category term="R" scheme="http://jackson19861023.github.io/leoliao1986.github.io/tags/R/"/>
+    
+    <category term="Baidu" scheme="http://jackson19861023.github.io/leoliao1986.github.io/tags/Baidu/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/hello-world/"/>
     <id>http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/hello-world/</id>
