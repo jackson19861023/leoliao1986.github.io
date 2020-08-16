@@ -1,83 +1,125 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="baidu-site-verification" content="vvVgSQUzPU" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-    <meta name="keywords" content="虎虎|博客|个人|utone|Utone|">
-    <meta name="description" content="骑士恨煎蛋，骑士恨孜然">
-    
-    <title>
-       Linking geographic information by Google Map API -  Hexo
-    </title>
-    
-<link rel="stylesheet" href="/leoliao1986.github.io/css/style.css">
- 
-    
-      <link rel="icon" href="/images/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linking geographic information by Google Map API | Hexo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.1.1/styles/solarized-light.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="/leoliao1986.github.io/custom.css"/>
+    <link rel="manifest" href="/leoliao1986.github.io/manifest.json" />
+    <link rel="apple-touch-icon" href="/leoliao1986.github.io/icon512.png">
+    <meta name="theme-color" content="#ffffff"/>
     
   <meta name="generator" content="Hexo 5.0.2"><link rel="alternate" href="/leoliao1986.github.io/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
   <body>
-    <div id="container">
-      <div id="main-left">
-        <div id="introduce">
-          <div class="logo-worp">
-            <a href="/"><img class="logo" src="/images/logo.png" alt=""/></a>
-          </div>
-          <ul>
-            
-              <li><a href="/leoliao1986.github.io/"> Home </a></li>
-            
-              <li><a href="/leoliao1986.github.io/archives"> Archive </a></li>
-            
-              <li><a href="/leoliao1986.github.io/about"> About </a></li>
-            
-              <li><a href="/leoliao1986.github.io/atom.xml"> RSS </a></li>
-            
-            <li>
-              <img id="search-img" src="/images/search.svg" alt="search" />
-            </li>
-          </ul>
-           
-             
-          
-        </div>
+    <script>
+      if ('serviceWorker' in navigator && false) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/leoliao1986.github.io/sw.js', {scope: '/leoliao1986.github.io/'})
+            .then(function (registration) {
+              // console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(function (err) {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+  <div id="page-container">
+    <nav class="navbar nav-shadow" role="navigation" aria-label="main navigation">
+  <div class="container">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+              <img src="/leoliao1986.github.io/icon192.png" height="50">
+          </a>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+             data-target="mainNavbar">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+          </a>
       </div>
-      <div id="main-right"><div id="post">
-    
-    <header class="article-header">
-        <h1>
-            Linking geographic information by Google Map API
-        </h1>
-    </header>
-    
-    <div class="post-meta">
-        <time class="post-data" datetime="2020-08-16T07:30:16.000Z" itemprop="datePublished">
-            2020-08-16
-        </time>
+      <div id="mainNavbar" class="navbar-menu">
+          <div class="navbar-start">
+              <a class="navbar-item" href="/leoliao1986.github.io/"> Hexo </a>
+              <a class="navbar-item" href="/leoliao1986.github.io/archives"> Archives </a>
+              <a class="navbar-item" href="/leoliao1986.github.io/about"> About </a>
+          </div>
+      </div>
+  </div>
+</nav>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  if ($navbarBurgers.length > 0) {
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  }
+});
+</script>
+    <div id="content-wrap">
+        <div class="container">
+          <div class="article-container">
+  <h1 class="title is-3 is-4-mobile">Linking geographic information by Google Map API</h1>
+  <article>
+      <div class="contents">
         
-        <ul class="post-category-list"><li class="post-category-list-item"><a class="post-category-list-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a><span class="post-category-list-count">1</span></li></ul>
-        
-        
-        <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/leoliao1986.github.io/tags/Google/" rel="tag">Google</a><span class="post-tag-list-count">1</span></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/leoliao1986.github.io/tags/R/" rel="tag">R</a><span class="post-tag-list-count">1</span></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/leoliao1986.github.io/tags/Spatial-location/" rel="tag">Spatial location</a><span class="post-tag-list-count">1</span></li></ul>
-        
-    </div>
-    
-    <div class="post-entry">
-        <p>We need locate the geographic information of the study participants before we conduct spatial analysis.<br>In this section, we introduce a simple method to link the residence of the study participants by Google Mapis.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">geocode_cn&lt;-function(address)&#123;</span><br><span class="line">           require(ggmap)</span><br><span class="line">require(rjson)</span><br><span class="line">##Transform Chinese address into english texts</span><br><span class="line">   for(i in 1:length(address))&#123;</span><br><span class="line">           location[i]&lt;-paste(paste(&#39;%&#39;,unlist(iconv(address[i],from&#x3D;&#39;GB2312&#39;,</span><br><span class="line">           to&#x3D;&quot;utf-8&quot;,toRaw&#x3D;T)),sep&#x3D;&#39;&#39;),collapse&#x3D;&#39;&#39;)</span><br><span class="line">&#125;</span><br><span class="line">posturl &lt;-paste(location, sep &#x3D; &quot;&amp;&quot;)</span><br><span class="line">url_string&lt;-paste(&quot;http:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;geocode&#x2F;json?address&#x3D;&quot;,</span><br><span class="line">            posturl,&quot;&amp;sensor&#x3D;false&quot;,sep&#x3D;&quot;&quot;)</span><br><span class="line">gc2&lt;-matrix(0,length(address),2)</span><br><span class="line"> for(i in 1:length(address))&#123;</span><br><span class="line">   url_string2&lt;-URLencode(url_string[i])</span><br><span class="line">  connect&lt;-url(url_string2)</span><br><span class="line">  lines&lt;-try(readLines(connect,warn&#x3D;FALSE),silent&#x3D;TRUE)</span><br><span class="line">  close(connect)</span><br><span class="line">gc&lt;-fromJSON(paste(lines,collapse&#x3D;&quot;&quot;))</span><br><span class="line">    if(gc$status&#x3D;&#x3D;&quot;OK&quot;) &#123;</span><br><span class="line">       lat &lt;-gcresults[[1]]geometrylocationlat</span><br><span class="line">       lon &lt;-gcresults[[1]]geometrylocationlng</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        lat&lt;-NA</span><br><span class="line">         lon&lt;-NA</span><br><span class="line">       &#125;</span><br><span class="line">      res&lt;-cbind(lon,lat)  </span><br><span class="line">   gc2[i,]&lt;-res[1,]</span><br><span class="line"> &#125;</span><br><span class="line"> return(gc2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      </div>
+      <p>We need locate the geographic information of the study participants before we conduct spatial analysis.<br>In this section, we introduce a simple method to link the residence of the study participants by Google Mapis.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">geocode_cn&lt;-function(address)&#123;</span><br><span class="line">           require(ggmap)</span><br><span class="line">require(rjson)</span><br><span class="line">##Transform Chinese address into english texts</span><br><span class="line">   for(i in 1:length(address))&#123;</span><br><span class="line">           location[i]&lt;-paste(paste(&#39;%&#39;,unlist(iconv(address[i],from&#x3D;&#39;GB2312&#39;,</span><br><span class="line">           to&#x3D;&quot;utf-8&quot;,toRaw&#x3D;T)),sep&#x3D;&#39;&#39;),collapse&#x3D;&#39;&#39;)</span><br><span class="line">&#125;</span><br><span class="line">posturl &lt;-paste(location, sep &#x3D; &quot;&amp;&quot;)</span><br><span class="line">url_string&lt;-paste(&quot;http:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;geocode&#x2F;json?address&#x3D;&quot;,</span><br><span class="line">            posturl,&quot;&amp;sensor&#x3D;false&quot;,sep&#x3D;&quot;&quot;)</span><br><span class="line">gc2&lt;-matrix(0,length(address),2)</span><br><span class="line"> for(i in 1:length(address))&#123;</span><br><span class="line">   url_string2&lt;-URLencode(url_string[i])</span><br><span class="line">  connect&lt;-url(url_string2)</span><br><span class="line">  lines&lt;-try(readLines(connect,warn&#x3D;FALSE),silent&#x3D;TRUE)</span><br><span class="line">  close(connect)</span><br><span class="line">gc&lt;-fromJSON(paste(lines,collapse&#x3D;&quot;&quot;))</span><br><span class="line">    if(gc$status&#x3D;&#x3D;&quot;OK&quot;) &#123;</span><br><span class="line">       lat &lt;-gcresults[[1]]geometrylocationlat</span><br><span class="line">       lon &lt;-gcresults[[1]]geometrylocationlng</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        lat&lt;-NA</span><br><span class="line">         lon&lt;-NA</span><br><span class="line">       &#125;</span><br><span class="line">      res&lt;-cbind(lon,lat)  </span><br><span class="line">   gc2[i,]&lt;-res[1,]</span><br><span class="line"> &#125;</span><br><span class="line"> return(gc2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    </div>
-    <!--畅言PC和WAP自适应版-->
-  
-</div></div>
-    </div>
-    <div id="footer">骑士恨煎蛋，骑士恨孜然</div>
-    <img id="top" src="/images/up-circle.svg" alt="top" />
+      <p class="copyright"><strong>Links: <a href="http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/A-good-day/">http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/A-good-day/</a></strong></p>
+  </article>
+  <div id="comment">
     
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function() {
+        this.page.url = "http://jackson19861023.github.io/leoliao1986.github.io/2020/08/16/A-good-day/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "ckdx1ie4y0001r4ujbmxhfddb"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+  
+      (function() {
+        var d = document,
+          s = d.createElement("script");
+        s.src = "https://iometa.disqus.com/embed.js";
+        s.setAttribute("data-timestamp", +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    
+</div>
+</div>
+        </div>
+    </div>
+    
+<footer id="footer">
+    <div class="content has-text-centered">
+        <p>
+            © 2020 <a href="http://jackson19861023.github.io/leoliao1986.github.io">John Doe</a>.
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>.
+            Theme <a target="_blank" rel="noopener" href="https://github.com/songquanpeng/hexo-theme-lightx">lightx</a>.
+            
+        </p>
+    </div>
+</footer>
+  </div>
+  
+    <script id="dsq-count-scr" src="//iometa.disqus.com/count.js" async></script>
+  
+  
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
@@ -95,14 +137,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
-<!-- 加载主题脚本文件 -->
-
-<script src="/leoliao1986.github.io/scripts/utone.js"></script>
-
-
-<script type="text/javascript">
-  window.onload = function() {
-    scroll.init()
-    siteSearch.init()
-  }
-</script>
