@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2020/8 | Hexo</title>
+  <title>Longitudinal data analysis | Hexo</title>
   <meta name="author" content="John Doe">
   
   
@@ -100,7 +100,7 @@
 
 <!-- title -->
 <div class="page-header page-header-inverse ">
-  <h1 class="archive-title title title-inverse ">2020/8</h1>
+  <h1 class="archive-title-category title title-inverse ">Longitudinal data analysis</h1>
 </div>
 
 <div class="row page">
@@ -112,44 +112,49 @@
 	  <div id="top_search"></div>
 
       
-	  <div class="archive">
-		
-		
-		
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2020">2020<b class="caret"></b></h4>
-			<ul id="2020" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-08-16 </span> &raquo;
-		
-		   <span class="title"><a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/"  title="Statistical methods for follow-up data." >纵向数据分析方法在公共卫生研究中应用</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-08-16 </span> &raquo;
-		
-		   <span class="title"><a href="/leoliao1986.github.io/2020/08/16/A-good-day/"  title="Multiple tasks of linking geographic residence from Google Maps." >Linking geographic information by Google Map API</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-08-16 </span> &raquo;
-		
-		   <span class="title"><a href="/leoliao1986.github.io/2020/08/16/hello-world/" >Hello World</a></span>
-		
-		</li>			
-		
-		</ul>
-		</div>
-        
+         <!-- display as entry -->
+	     <div class="mypage">
+	       
+		     
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2020-08-16 </div>
+			<div class="article-title"><a href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/" title="Statistical methods for follow-up data.">纵向数据分析方法在公共卫生研究中应用</a></div>						
+		</h3>
+	
+
+
+		     <div class="entry">
+  <div class="row">
+	
+	
+		<p>纵向数据即我们通常所说的重复测量数据，指观察对象的研究效应不仅包括研究结局，还包括出现结局变量的时间。当研究对象的研究结局在各个测量点之间的研究效应不独立时，协方差结构将会相对复杂，因此需要在统计分析时，考虑复杂协方差结构，由此形成了一系列纵向数据分析的统计分析方法。</p>
+<p>根据资料类型的不同，纵向数据分析方法也各不相同。对定量结局变量，纵向数据分析方法主要包括重复测量方差分析，截断回归模型，中断时间序列分析，线性混合模型等。对定性的结局变量，纵向数据分析方法主要包括广义估算方程以及广义线性混合模型等。</p>
+<p>重复测量方差分析在纵向数据分析中应用较为广泛。此方法可以处理定量结局变量在多个测量时间点之间可能存在的不独立情况。但对数据各个时间点的协方差结构有要求，即我们通常所说的球型性检验，要求协方差结构满足复对称结构。同时，重复测量方差分析不能纳入协变量，只能分析时间效应和处理因素的效应。因此，重复测量方差分析对混杂因素的处理相对较弱。</p>
+<p>截断回归模型，中断时间序列，线性混合模型等处理重复测量数据时，都可以纳入协变量。因此可以很好地测量重复测量数据中的混杂效应。截断回归模型，中断时间序列是同一类模型，多应用于政策干预前后效果的评价，中断时间序列模型考虑了各个时间点之间存在的自回归现象。其基本思想是以干预时间发生前后分为两个不同时间点，分别拟合两条斜率的回归模型，从而通过比较时间点前后斜率的变化来评价政策干预是否达到了预期目的。</p>
+<p>线性混合模型在一般线性回归的基础上引入随机效应，并且协方差结构也可以考虑多种情况，从而更好进行参数估计。线性混合模型最常见的就是方差成分模型，即在截距项上引入随机效应，从而在统计分析时，充分考虑到时间变异的影响。如研究一项药物治疗铅中毒的疗效，研究者分别在治疗后1周，治疗后4周，治疗后6周测量试验组和对照组患者的血铅含量水平。此时，可以利用线性混合模型，在截距项上引入测量时间的随机效应，从而在考虑时间变异的情况下，更好地分析试验效应。</p>
+<p>结局变量为定性数据时，可以考虑使用广义线性混合模型和广义估算方程。根据结局变量的不同，广义线性混合模型主要包括广义logistics模型，广义Poisson模型，广义负二项回归模型。广义估算方程也是处理分类变量结局的数据，但其出发点与广义线性混合模型有所差别。广义线性混合模型即在广义线性模型的基础之上引入随机效应，其出发点仍然在控制时间差异的基础上，分析个体效应的差别。而广义估算方程则更关注群体效应，在允许自由估计观察对象的协方差结构的前提下，通过一定的统计变换和标准误较正方法，即使协方差结构无法准确定义，广义估算方程也可以对群体效应进行较为准确的估算。</p>
+<p>SAS软件对纵向数据分析有完备的支持。中断时间序列可以在proc autreg过程中拟合，广义线性模型可以在proc mixed过程中拟合。广义线性混合模型可以在proc glimmix过程中拟合，广义估算方程可以在proc genmod过程中拟合。</p>
+
+	
+	</div>
+  <a type="button" href="/leoliao1986.github.io/2020/08/16/Longitudinal-data-analysis/#more" class="btn btn-default more">Read More</a>
+</div>
+
+	       
+	     </div>
+	     <div>
+	       <center>
+	         <div class="pagination">
+<ul class="pagination">
+	 
+</ul>
+</div>
+
+	       </center>
+	     </div>	
+      
 
 </div> <!-- col-md-9/col-md-12 -->
 
@@ -204,15 +209,15 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/leoliao1986.github.io/tags/Spatial-location/">Spatial location<span>1</span></a></li>
+			<li><a href="/leoliao1986.github.io/tags/R/">R<span>1</span></a></li>
 		
 			<li><a href="/leoliao1986.github.io/tags/Cohort/">Cohort<span>1</span></a></li>
 		
 			<li><a href="/leoliao1986.github.io/tags/Longitudinal-data/">Longitudinal data<span>1</span></a></li>
 		
-			<li><a href="/leoliao1986.github.io/tags/R/">R<span>1</span></a></li>
-		
 			<li><a href="/leoliao1986.github.io/tags/Google/">Google<span>1</span></a></li>
+		
+			<li><a href="/leoliao1986.github.io/tags/Spatial-location/">Spatial location<span>1</span></a></li>
 		
 		 
 		</ul>
