@@ -1,5 +1,383 @@
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Linking geographic information by Google Map API | Hexo</title><link rel="stylesheet" type="text/css" href="/leoliao1986.github.io/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/leoliao1986.github.io/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/leoliao1986.github.io/favicon.ico"><link rel="apple-touch-icon" href="/leoliao1986.github.io/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/leoliao1986.github.io/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.2"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Linking geographic information by Google Map API</h1><a id="logo" href="/leoliao1986.github.io/.">Hexo</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/leoliao1986.github.io/."><i class="fa fa-home"> Home</i></a><a href="/leoliao1986.github.io/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/leoliao1986.github.io/about/"><i class="fa fa-user"> About</i></a><a href="/leoliao1986.github.io/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Linking geographic information by Google Map API</h1><div class="post-meta">2020-08-16<span> | </span><span class="category"><a href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a></span></div><div class="post-content"><p>We need locate the geographic information of the study participants before we conduct spatial analysis.<br>In this section, we introduce a simple method to link the residence of the study participants by Google Mapis.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">geocode_cn&lt;-function(address)&#123;</span><br><span class="line">           require(ggmap)</span><br><span class="line">require(rjson)</span><br><span class="line">##Transform Chinese address into english texts</span><br><span class="line">   for(i in 1:length(address))&#123;</span><br><span class="line">           location[i]&lt;-paste(paste(&#39;%&#39;,unlist(iconv(address[i],from&#x3D;&#39;GB2312&#39;,</span><br><span class="line">           to&#x3D;&quot;utf-8&quot;,toRaw&#x3D;T)),sep&#x3D;&#39;&#39;),collapse&#x3D;&#39;&#39;)</span><br><span class="line">&#125;</span><br><span class="line">posturl &lt;-paste(location, sep &#x3D; &quot;&amp;&quot;)</span><br><span class="line">url_string&lt;-paste(&quot;http:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;geocode&#x2F;json?address&#x3D;&quot;,</span><br><span class="line">            posturl,&quot;&amp;sensor&#x3D;false&quot;,sep&#x3D;&quot;&quot;)</span><br><span class="line">gc2&lt;-matrix(0,length(address),2)</span><br><span class="line"> for(i in 1:length(address))&#123;</span><br><span class="line">   url_string2&lt;-URLencode(url_string[i])</span><br><span class="line">  connect&lt;-url(url_string2)</span><br><span class="line">  lines&lt;-try(readLines(connect,warn&#x3D;FALSE),silent&#x3D;TRUE)</span><br><span class="line">  close(connect)</span><br><span class="line">gc&lt;-fromJSON(paste(lines,collapse&#x3D;&quot;&quot;))</span><br><span class="line">    if(gc$status&#x3D;&#x3D;&quot;OK&quot;) &#123;</span><br><span class="line">       lat &lt;-gcresults[[1]]geometrylocationlat</span><br><span class="line">       lon &lt;-gcresults[[1]]geometrylocationlng</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        lat&lt;-NA</span><br><span class="line">         lon&lt;-NA</span><br><span class="line">       &#125;</span><br><span class="line">      res&lt;-cbind(lon,lat)  </span><br><span class="line">   gc2[i,]&lt;-res[1,]</span><br><span class="line"> &#125;</span><br><span class="line"> return(gc2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</div><div class="tags"><a href="/leoliao1986.github.io/tags/Spatial-location/"><i class="fa fa-tag"></i>Spatial location</a><a href="/leoliao1986.github.io/tags/Google/"><i class="fa fa-tag"></i>Google</a><a href="/leoliao1986.github.io/tags/R/"><i class="fa fa-tag"></i>R</a></div><div class="post-nav"><a class="next" href="/leoliao1986.github.io/2020/08/16/hello-world/">Hello World</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://jackson19861023.github.io/leoliao1986.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/leoliao1986.github.io/tags/Spatial-location/" style="font-size: 15px;">Spatial location</a> <a href="/leoliao1986.github.io/tags/Google/" style="font-size: 15px;">Google</a> <a href="/leoliao1986.github.io/tags/R/" style="font-size: 15px;">R</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/leoliao1986.github.io/2020/08/16/A-good-day/">Linking geographic information by Google Map API</a></li><li class="post-list-item"><a class="post-list-link" href="/leoliao1986.github.io/2020/08/16/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/leoliao1986.github.io/." rel="nofollow">Hexo.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/leoliao1986.github.io/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/leoliao1986.github.io/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>Linking geographic information by Google Map API | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
+    <meta name="description" content="Jelon个人前端小站" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="/leoliao1986.github.io/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/leoliao1986.github.io/css/style.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/leoliao1986.github.io/js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d5ebf515ab530cfbdda5f5c85093fb41";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/leoliao1986.github.io/">
+                <div class="cover">
+                    <span class="name">Hexo</span>
+                    <span class="description"></span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/leoliao1986.github.io/2020/08/16/A-good-day/index.html" class="item ">
+                <a href="/leoliao1986.github.io/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/leoliao1986.github.io/2020/08/16/A-good-day/index.html" class="item ">
+                <a href="/leoliao1986.github.io/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="/leoliao1986.github.io/2020/08/16/A-good-day/index.html" class="item ">
+                <a href="/leoliao1986.github.io/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/leoliao1986.github.io/2020/08/16/A-good-day/index.html" class="item ">
+                <a href="/leoliao1986.github.io/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://www.facebook.com/profile.php?id=100011855760219&amp;ref=bookmarks" class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/leoliao1986.github.io/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Linking geographic information by Google Map API</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2020-08-16T07:30:16.000Z">2020-08-16</time>
+    </p>
+    <div class="post-content">
+        <p>We need locate the geographic information of the study participants before we conduct spatial analysis.<br>In this section, we introduce a simple method to link the residence of the study participants by Google Mapis.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">geocode_cn&lt;-function(address)&#123;</span><br><span class="line">           require(ggmap)</span><br><span class="line">require(rjson)</span><br><span class="line">##Transform Chinese address into english texts</span><br><span class="line">   for(i in 1:length(address))&#123;</span><br><span class="line">           location[i]&lt;-paste(paste(&#39;%&#39;,unlist(iconv(address[i],from&#x3D;&#39;GB2312&#39;,</span><br><span class="line">           to&#x3D;&quot;utf-8&quot;,toRaw&#x3D;T)),sep&#x3D;&#39;&#39;),collapse&#x3D;&#39;&#39;)</span><br><span class="line">&#125;</span><br><span class="line">posturl &lt;-paste(location, sep &#x3D; &quot;&amp;&quot;)</span><br><span class="line">url_string&lt;-paste(&quot;http:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;geocode&#x2F;json?address&#x3D;&quot;,</span><br><span class="line">            posturl,&quot;&amp;sensor&#x3D;false&quot;,sep&#x3D;&quot;&quot;)</span><br><span class="line">gc2&lt;-matrix(0,length(address),2)</span><br><span class="line"> for(i in 1:length(address))&#123;</span><br><span class="line">   url_string2&lt;-URLencode(url_string[i])</span><br><span class="line">  connect&lt;-url(url_string2)</span><br><span class="line">  lines&lt;-try(readLines(connect,warn&#x3D;FALSE),silent&#x3D;TRUE)</span><br><span class="line">  close(connect)</span><br><span class="line">gc&lt;-fromJSON(paste(lines,collapse&#x3D;&quot;&quot;))</span><br><span class="line">    if(gc$status&#x3D;&#x3D;&quot;OK&quot;) &#123;</span><br><span class="line">       lat &lt;-gcresults[[1]]geometrylocationlat</span><br><span class="line">       lon &lt;-gcresults[[1]]geometrylocationlng</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        lat&lt;-NA</span><br><span class="line">         lon&lt;-NA</span><br><span class="line">       &#125;</span><br><span class="line">      res&lt;-cbind(lon,lat)  </span><br><span class="line">   gc2[i,]&lt;-res[1,]</span><br><span class="line"> &#125;</span><br><span class="line"> return(gc2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/leoliao1986.github.io/tags/Spatial-location/" title="Spatial location">Spatial location</a> / 
+    
+        <a href="/leoliao1986.github.io/tags/Google/" title="Google">Google</a> / 
+    
+        <a href="/leoliao1986.github.io/tags/R/" title="R">R</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/leoliao1986.github.io/2020/08/16/hello-world/">
+            
+                Hello World
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  
+<script src="/leoliao1986.github.io/js/comment.js"></script>
+
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'A-good-day' || '2020/08/16/A-good-day/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
   });
-</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/leoliao1986.github.io/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/leoliao1986.github.io/js/smartresize.js?v=0.0.0"></script></div></body></html>
+  </script>
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/leoliao1986.github.io/categories/Spaitial-epidemiology/">Spaitial epidemiology</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/leoliao1986.github.io/tags/Spatial-location/" title="Spatial location">Spatial location (1)</a>
+  
+    <a class="tag-item" href="/leoliao1986.github.io/tags/Google/" title="Google">Google (1)</a>
+  
+    <a class="tag-item" href="/leoliao1986.github.io/tags/R/" title="R">R (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/front-end-pigs/blog" target="_blank" title="Github博客">Github博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2020
+    
+
+    <a href="/leoliao1986.github.io/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/leoliao1986.github.io/js/main.js?v=1597567921060.js"></script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
